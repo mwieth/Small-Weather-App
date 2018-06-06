@@ -2,7 +2,6 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
@@ -21,13 +20,6 @@ gulp.task('type', function () {
 });
 
 // Styles
-
-gulp.task('html', function () {
-    return gulp.src('dev/index.html')
-        .pipe(strip())
-        .pipe(gulp.dest(''))
-});
-
 gulp.task('styles', function () {
     return gulp.src('dev/styl/main.styl')
         .pipe(stylus())
@@ -46,21 +38,16 @@ gulp.task('styles', function () {
 gulp.task('ts', () =>
     gulp.src('dev/ts/**/*.ts')
     .pipe(tsProject())
+    .pipe(rename({
+        suffix: '.min'
+    }))
     //.pipe(concat('main.min.js'))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('web/scripts'))
+    .pipe(notify({
+        message: 'Scripts task complete'
+    }))
 );
-
-// Scripts
-gulp.task('scripts', function () {
-    return gulp.src('dev/js/vendor/**/*.js')
-        /* .pipe(rename({ suffix: '.min' })) */
-        .pipe(uglify())
-        .pipe(gulp.dest('web/scripts/vendor'))
-        .pipe(notify({
-            message: 'Scripts task complete'
-        }));
-});
 
 // Clean
 gulp.task('clean', function () {
@@ -69,7 +56,7 @@ gulp.task('clean', function () {
 
 // Default task
 gulp.task('default', ['clean'], function () {
-    gulp.start(['html', 'styles', 'scripts', 'ts']);
+    gulp.start(['styles', 'ts']);
 });
 
 // Watch
@@ -80,12 +67,6 @@ gulp.task('watch', function () {
 
     // Watch .ts files
     gulp.watch('dev/ts/**/*.ts', ['ts']);
-
-    // Watch image files
-    gulp.watch('dev/img/**/*', ['images']);
-
-    //Watch html
-    gulp.watch('dev/index.html', ['html'])
 
     // Create LiveReload server
     livereload.listen();
