@@ -1,0 +1,67 @@
+*
+  box-sizing: border-box
+
+body 
+  margin: 0
+  padding: 0
+  background: linear-gradient(135deg, rgba(85,239,203,1) 0%,rgba(30,87,153,1) 0%,rgba(85,239,203,1) 0%,rgba(91,202,255,1) 100%);
+  color: #ffffff
+  height: 100vh
+  .main  
+    display: flex
+    justify-content: center
+    flex-direction: column
+    position: relative
+    .headline
+      text-align: center
+    .result,
+    .input__area
+      display: flex
+      justify-content: center
+
+    .input__area
+      margin-bottom: 30px
+
+  .result
+    margin: 0 auto
+    &__item
+      padding: 10px 15px
+      margin: 5px
+      border: 2px solid #fff
+      flex: 1 0 200px
+      text-align: center
+      &--value
+        font-size: 1.3em
+        margin-top: 10px
+
+input
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  background: inherit
+  display: block;
+  font-size: 16px;
+  padding: 8px 0px;
+  -webkit-transition: 0.2s border-bottom;
+  transition: 0.2s border-bottom;
+  &:active,
+  &:focus
+    border-bottom: 1px solid #2196f3
+    outline: none
+
+.button
+  min-width: 120px
+  border: 1px solid #ffffff 
+  text-overflow: ellipsis
+  overflow: hidden
+  padding: 5px 10px
+  text-align: center
+  margin-left: 25px
+  box-shadow: 1px 1px 0px 0px #6e7672
+  &:hover,
+  &:active,
+  &:focus
+    cursor: pointer
+    background: #ffffff
+    color: rgba(85,239,203,1)
+
+@import 'backgrounds.styl'
