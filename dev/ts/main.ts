@@ -42,8 +42,7 @@ document.querySelector('.button').addEventListener('click', function () {
         }
 
       }).catch(function (error) {
-        console.log('gwgrgrgr');
-        console.log(error);
+        log(error);
       });
   }
 })
